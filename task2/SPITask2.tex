@@ -1,0 +1,647 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+	\usepackage{pdflscape}
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{mathrsfs}
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatibility definitions
+    \def\gt{>}
+    \def\lt{<}
+    \let\Oldtex\TeX
+    \let\Oldlatex\LaTeX
+    \renewcommand{\TeX}{\textrm{\Oldtex}}
+    \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+    % Document parameters
+    % Document title
+    \title{Domácí úkol 2}
+    \author{Ladislav Martínek a Richard Werner}
+    
+    
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section*{Domácí úkol 2 (6
+bodů)}\label{domuxe1cuxed-uxfakol-1-6-bodux16f}
+
+    \section{Úkoly}\label{uxfakoly}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  (1b) Z datového souboru načtěte text k analýze. Odhadněte
+  pravděpodobnosti písmen (včetně mezer), které se v textu vyskytují.
+  Takto získané empirické rozdělení graficky znázorněte. Pro další body
+  předpokládejme, že je text vygenerován z homogenního markovského
+  řetězce s diskrétním časem.
+\item
+  (1.5b) Za tohoto předpokladu odhadněte matici přechodu.
+\item
+  (2b) Na základě matice z předchozího bodu najděte stacionární
+  rozdělení tohoto řetězce.
+\item
+  (1.5b) Porovnejte stacionární rozdělení se získaným empirickým
+  rozdělením. Tj. na hladině 5\% otestujte hypotézu, že se empirické
+  rozdělení z bodu 1 rovná stacionárnímu rozdělení.
+\end{enumerate}
+\pagebreak
+    \section{Řešení}\label{ux159eux161enuxed}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{math}
+        \PY{k+kn}{import} \PY{n+nn}{scipy}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import} \PY{n}{stats}
+\end{Verbatim}
+
+    \subsection{Zpracování souborů}\label{zpracovuxe1nuxed-souborux16f}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{K} \PY{o}{=} \PY{l+m+mi}{15}
+        \PY{n}{L} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Martínek}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{X} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{n}{K}\PY{o}{*}\PY{n}{L}\PY{o}{*}\PY{l+m+mi}{23}\PY{p}{)} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}
+        \PY{n}{X\PYZus{}file} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{3}\PY{o}{\PYZhy{}}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.txt}\PY{l+s+s1}{\PYZsq{}}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k}{def} \PY{n+nf}{read\PYZus{}whole\PYZus{}file}\PY{p}{(}\PY{n}{filename}\PY{p}{)}\PY{p}{:}
+            \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{filename}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{file}\PY{p}{:}
+                \PY{k}{return} \PY{n}{file}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n}{xfile} \PY{o}{=} \PY{n}{read\PYZus{}whole\PYZus{}file}\PY{p}{(}\PY{n}{X\PYZus{}file}\PY{p}{)}
+\end{Verbatim}
+
+    \subsection{Příklad 1}\label{pux159uxedklad-1}
+
+    \begin{itemize}
+\tightlist
+\item
+  Na následujícím grafu jsou znázorněny vypočítané pravděpodobnosti
+  výskytu daných písmen (znaků) v datovém souboru.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{xletters}\PY{p}{,} \PY{n}{xletter\PYZus{}cnt} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{xfile}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{,} 
+						\PY{n}{return\PYZus{}counts}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}                
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{xletter\PYZus{}cnt\PYZus{}prob} \PY{o}{=} \PY{n}{xletter\PYZus{}cnt}\PY{o}{/}\PY{n}{xletter\PYZus{}cnt}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+        \PY{n}{f}\PY{p}{,} \PY{n}{ax1} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+        \PY{n}{ax1}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{xletters}\PY{p}{,} \PY{n}{xletter\PYZus{}cnt\PYZus{}prob}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{0.48}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+        \PY{k}{for} \PY{n}{tick} \PY{o+ow}{in} \PY{n}{ax1}\PY{o}{.}\PY{n}{xaxis}\PY{o}{.}\PY{n}{get\PYZus{}major\PYZus{}ticks}\PY{p}{(}\PY{p}{)}\PY{p}{:} \PY{n}{tick}\PY{o}{.}\PY{n}{label}\PY{o}{.}\PY{n}{set\PYZus{}fontsize}\PY{p}{(}\PY{l+m+mi}{14}\PY{p}{)} 
+        \PY{k}{for} \PY{n}{tick} \PY{o+ow}{in} \PY{n}{ax1}\PY{o}{.}\PY{n}{yaxis}\PY{o}{.}\PY{n}{get\PYZus{}major\PYZus{}ticks}\PY{p}{(}\PY{p}{)}\PY{p}{:} \PY{n}{tick}\PY{o}{.}\PY{n}{label}\PY{o}{.}\PY{n}{set\PYZus{}fontsize}\PY{p}{(}\PY{l+m+mi}{14}\PY{p}{)}
+        \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{znak}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+        \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pravděpodobnost}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+        \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Soubor X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{22}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Příklad 2}\label{pux159uxedklad-2}
+
+    Iterovali jsme přes celý textový soubor a napočítali konkrétní přechody
+mezi písmeny (znaky). Abychom získali matici přechodů, bylo nutné, aby
+suma v řádku byla rovna 1 pro pravděpodobnost přechodu ze znaku $i$ do
+znaku $j$. Takže jsme každý řádek matice vydělili jeho součtem. Níže je
+vidět výsledná matice přechodu.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{} dict with keys to the matrix}
+         \PY{n}{letters} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{xfile}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{letter\PYZus{}to\PYZus{}key} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+         \PY{n}{key\PYZus{}to\PYZus{}letter} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+         \PY{n}{cnt} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{letters}\PY{p}{:}
+             \PY{k}{if} \PY{n}{i} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{letter\PYZus{}to\PYZus{}key}\PY{p}{:}
+                 \PY{n}{letter\PYZus{}to\PYZus{}key}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{cnt}
+                 \PY{n}{key\PYZus{}to\PYZus{}letter}\PY{p}{[}\PY{n}{cnt}\PY{p}{]} \PY{o}{=} \PY{n}{i}
+                 \PY{n}{cnt} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+         \PY{n}{matrix} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{letter\PYZus{}to\PYZus{}key}\PY{p}{)}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{letter\PYZus{}to\PYZus{}key}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} counts in matrix}
+         \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{letter} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{letters}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n}{matrix}\PY{p}{[}\PY{n}{letter\PYZus{}to\PYZus{}key}\PY{p}{[}\PY{n}{letter}\PY{p}{]}\PY{p}{]}\PY{p}{[}\PY{n}{letter\PYZus{}to\PYZus{}key}\PY{p}{[}\PY{n}{letters}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+             
+         \PY{c+c1}{\PYZsh{} transition matrix \PYZhy{} need sum of row == 1}
+         \PY{n}{P} \PY{o}{=} \PY{n}{matrix}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{matrix}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{newaxis}\PY{p}{]}
+         
+         \PY{n}{string} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ |}\PY{l+s+s1}{\PYZsq{}}
+         \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n}{key\PYZus{}to\PYZus{}letter}\PY{p}{:}
+             \PY{n}{string} \PY{o}{=} \PY{n}{string} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ |}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{key\PYZus{}to\PYZus{}letter}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}
+         \PY{n}{display}\PY{p}{(}\PY{n}{string}\PY{p}{)}
+             
+         \PY{c+c1}{\PYZsh{} print the matrix}
+         \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{row} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{P}\PY{p}{)}\PY{p}{:}
+             \PY{n}{string} \PY{o}{=} \PY{n}{key\PYZus{}to\PYZus{}letter}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{| }\PY{l+s+s1}{\PYZsq{}}
+             \PY{k}{for} \PY{n}{j}\PY{p}{,} \PY{n}{letter\PYZus{}cnt} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{row}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n+nb}{round}\PY{p}{(}\PY{n}{letter\PYZus{}cnt}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n}{string} \PY{o}{=} \PY{n}{string} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}0:.2f\PYZcb{}}\PY{l+s+s1}{|}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{letter\PYZus{}cnt}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{string} \PY{o}{=} \PY{n}{string} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}0:.2f\PYZcb{}}\PY{l+s+s1}{|}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{letter\PYZus{}cnt}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+             \PY{n}{display}\PY{p}{(}\PY{n}{string}\PY{p}{)}
+\end{Verbatim}
+
+\pagebreak
+    
+    
+   \pagestyle{empty}
+\begin{landscape}
+\begin{table}[]
+\begin{center}
+% Please add the following required packages to your document preamble:
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+\resizebox{\columnwidth}{200pt}{%
+\begin{tabular}{|l||l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+\hline
+ & p    & i    & e    & r    & o    & t    & ,    &      & d    & g    & f    & b    & l    & u    & m    & y    & w    & a    & .    & h    & c    & n    & s    & v    & k    & q    & j    & x    & z      \\ \hline \hline
+p                         & 0.11 & 0.13 & 0.25 & 0.07 & 0.05 & 0.02 & 0.00 & 0.08 & 0.00 & 0.00 & 0.00 & 0.00 & 0.15 & 0.07 & 0.00 & 0.02 & 0.00 & 0.05 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00   \\ \hline
+i                        & 0.01 & 0.00 & 0.08 & 0.08 & 0.02 & 0.15 & 0.00 & 0.06 & 0.03 & 0.04 & 0.03 & 0.00 & 0.03 & 0.01 & 0.05 & 0.00 & 0.00 & 0.01 & 0.00 & 0.00 & 0.04 & 0.24 & 0.09 & 0.02 & 0.01 & 0.00 & 0.00 & 0.00 & 0.00   \\ \hline
+e                        & 0.01 & 0.02 & 0.03 & 0.15 & 0.00 & 0.02 & 0.00 & 0.35 & 0.10 & 0.01 & 0.00 & 0.00 & 0.04 & 0.00 & 0.01 & 0.02 & 0.00 & 0.07 & 0.00 & 0.00 & 0.01 & 0.09 & 0.05 & 0.01 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00   \\ \hline
+r                        & 0.00 & 0.12 & 0.25 & 0.04 & 0.11 & 0.04 & 0.00 & 0.18 & 0.03 & 0.01 & 0.01 & 0.00 & 0.01 & 0.01 & 0.01 & 0.02 & 0.00 & 0.06 & 0.00 & 0.00 & 0.00 & 0.03 & 0.04 & 0.00 & 0.02 & 0.00 & 0.00 & 0.00 & 0.00   \\ \hline
+o                        & 0.01 & 0.01 & 0.00 & 0.11 & 0.05 & 0.07 & 0.00 & 0.12 & 0.01 & 0.05 & 0.11 & 0.00 & 0.05 & 0.14 & 0.06 & 0.00 & 0.03 & 0.00 & 0.00 & 0.00 & 0.00 & 0.11 & 0.02 & 0.01 & 0.01 & 0.00 & 0.00 & 0.00 & 0.01   \\ \hline
+t                        & 0.00 & 0.03 & 0.06 & 0.03 & 0.09 & 0.03 & 0.00 & 0.29 & 0.00 & 0.00 & 0.00 & 0.00 & 0.04 & 0.01 & 0.00 & 0.00 & 0.00 & 0.02 & 0.00 & 0.35 & 0.00 & 0.00 & 0.03 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00   \\ \hline
+,                        & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 1.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00   \\ \hline
+                         & 0.04 & 0.03 & 0.01 & 0.01 & 0.06 & 0.14 & 0.00 & 0.00 & 0.05 & 0.02 & 0.05 & 0.06 & 0.04 & 0.00 & 0.04 & 0.01 & 0.07 & 0.13 & 0.00 & 0.09 & 0.04 & 0.02 & 0.06 & 0.01 & 0.01 & 0.00 & 0.01 & 0.00 & 0.00   \\ \hline
+d                        & 0.00 & 0.05 & 0.10 & 0.04 & 0.10 & 0.00 & 0.00 & 0.58 & 0.01 & 0.00 & 0.01 & 0.00 & 0.02 & 0.01 & 0.00 & 0.01 & 0.00 & 0.04 & 0.00 & 0.00 & 0.00 & 0.00 & 0.04 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00   \\ \hline
+g                        & 0.00 & 0.04 & 0.09 & 0.12 & 0.03 & 0.01 & 0.00 & 0.32 & 0.00 & 0.04 & 0.00 & 0.00 & 0.01 & 0.04 & 0.00 & 0.02 & 0.00 & 0.04 & 0.00 & 0.12 & 0.00 & 0.01 & 0.11 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00   \\ \hline
+f                        & 0.00 & 0.07 & 0.09 & 0.10 & 0.19 & 0.04 & 0.00 & 0.33 & 0.00 & 0.00 & 0.04 & 0.00 & 0.04 & 0.07 & 0.00 & 0.00 & 0.00 & 0.06 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00   \\ \hline
+b                        & 0.00 & 0.10 & 0.21 & 0.13 & 0.11 & 0.00 & 0.00 & 0.02 & 0.00 & 0.00 & 0.00 & 0.02 & 0.13 & 0.13 & 0.00 & 0.03 & 0.00 & 0.10 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00   \\ \hline
+l                        & 0.00 & 0.12 & 0.21 & 0.00 & 0.11 & 0.01 & 0.00 & 0.10 & 0.09 & 0.02 & 0.01 & 0.00 & 0.12 & 0.03 & 0.00 & 0.07 & 0.00 & 0.07 & 0.00 & 0.00 & 0.00 & 0.00 & 0.03 & 0.00 & 0.02 & 0.00 & 0.00 & 0.00 & 0.00   \\ \hline
+u                        & 0.06 & 0.02 & 0.02 & 0.10 & 0.00 & 0.15 & 0.00 & 0.01 & 0.02 & 0.10 & 0.00 & 0.01 & 0.12 & 0.00 & 0.04 & 0.01 & 0.00 & 0.02 & 0.00 & 0.00 & 0.03 & 0.14 & 0.14 & 0.00 & 0.01 & 0.00 & 0.00 & 0.00 & 0.01   \\ \hline
+m                        & 0.02 & 0.07 & 0.25 & 0.00 & 0.09 & 0.00 & 0.01 & 0.20 & 0.00 & 0.00 & 0.00 & 0.05 & 0.00 & 0.05 & 0.00 & 0.00 & 0.00 & 0.20 & 0.00 & 0.00 & 0.00 & 0.00 & 0.05 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00   \\ \hline
+y                        & 0.00 & 0.00 & 0.09 & 0.00 & 0.04 & 0.01 & 0.00 & 0.80 & 0.00 & 0.00 & 0.00 & 0.01 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.01 & 0.00 & 0.00 & 0.00 & 0.00 & 0.02 & 0.00 & 0.01 & 0.00 & 0.00 & 0.00 & 0.00   \\ \hline
+w                        & 0.00 & 0.12 & 0.17 & 0.01 & 0.12 & 0.00 & 0.00 & 0.08 & 0.00 & 0.00 & 0.00 & 0.00 & 0.01 & 0.00 & 0.00 & 0.00 & 0.00 & 0.27 & 0.00 & 0.14 & 0.00 & 0.06 & 0.02 & 0.00 & 0.01 & 0.00 & 0.00 & 0.00 & 0.00   \\ \hline
+a                        & 0.01 & 0.02 & 0.01 & 0.11 & 0.00 & 0.10 & 0.00 & 0.06 & 0.07 & 0.03 & 0.01 & 0.03 & 0.06 & 0.02 & 0.01 & 0.04 & 0.02 & 0.00 & 0.00 & 0.00 & 0.04 & 0.26 & 0.08 & 0.01 & 0.02 & 0.00 & 0.00 & 0.00 & 0.00   \\ \hline
+.                        & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 1.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00   \\ \hline
+h                        & 0.00 & 0.13 & 0.48 & 0.00 & 0.08 & 0.04 & 0.00 & 0.09 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.03 & 0.00 & 0.00 & 0.00 & 0.15 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00   \\ \hline
+c                        & 0.00 & 0.03 & 0.11 & 0.00 & 0.19 & 0.07 & 0.00 & 0.02 & 0.00 & 0.00 & 0.00 & 0.00 & 0.05 & 0.03 & 0.00 & 0.00 & 0.00 & 0.16 & 0.00 & 0.25 & 0.01 & 0.00 & 0.00 & 0.00 & 0.09 & 0.00 & 0.00 & 0.00 & 0.00   \\ \hline
+n                        & 0.00 & 0.02 & 0.06 & 0.05 & 0.04 & 0.06 & 0.00 & 0.25 & 0.29 & 0.12 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.01 & 0.00 & 0.03 & 0.00 & 0.00 & 0.03 & 0.01 & 0.02 & 0.00 & 0.01 & 0.00 & 0.00 & 0.00 & 0.00   \\ \hline
+s                        & 0.01 & 0.04 & 0.08 & 0.00 & 0.08 & 0.11 & 0.00 & 0.49 & 0.00 & 0.00 & 0.00 & 0.00 & 0.01 & 0.02 & 0.01 & 0.01 & 0.01 & 0.03 & 0.00 & 0.05 & 0.01 & 0.00 & 0.02 & 0.00 & 0.00 & 0.02 & 0.00 & 0.00 & 0.00   \\ \hline
+v                        & 0.00 & 0.13 & 0.73 & 0.00 & 0.03 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.10 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00   \\ \hline
+k                        & 0.00 & 0.15 & 0.40 & 0.00 & 0.00 & 0.00 & 0.00 & 0.33 & 0.00 & 0.00 & 0.00 & 0.00 & 0.04 & 0.00 & 0.00 & 0.00 & 0.02 & 0.02 & 0.00 & 0.00 & 0.00 & 0.02 & 0.02 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00   \\ \hline
+q                        & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 1.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00   \\ \hline
+j                        & 0.00 & 0.00 & 0.87 & 0.00 & 0.13 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00   \\ \hline
+x                        & 1.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00   \\ \hline
+z                        & 0.00 & 0.17 & 0.50 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.17 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.17   \\ \hline
+\end{tabular}
+}
+\end{center}
+\end{table}
+\end{landscape}
+\pagestyle{plain}
+
+
+    
+    \subsection{Příklad 3}\label{pux159uxedklad-3}
+
+    Při hledání stacionárního rozdělení vycházíme z rovnosti
+\(\pi = \pi P\). Dále že pokud platí \(\vec{v} P = \lambda \vec{v}\),
+potom také \((\alpha \vec{v}) P = \lambda (\alpha \vec{v})\). Z
+dokumnetace scipy metoda eig vrací jako druhý argument: \emph{The
+normalized left eigenvector corresponding to the eigenvalue w{[}i{]} is
+the column vl{[}:,i{]}. Only returned if left=True}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} Solve an ordinary or generalized eigenvalue problem of a square matrix.}
+        \PY{n}{v} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{eig}\PY{p}{(}\PY{n}{P}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{float}\PY{p}{)}\PY{p}{,}\PY{n}{left}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}\PY{n}{right}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} The eigenvalues, each repeated according to its multiplicity.}
+        \PY{n}{v} \PY{o}{=} \PY{n}{v}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{} get first column}
+        \PY{n}{v} \PY{o}{=} \PY{n}{v}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+        \PY{n}{stacionary\PYZus{}distribution} \PY{o}{=} \PY{n}{v} \PY{o}{/} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{v}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Stacionary distribution}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{stacionary\PYZus{}distribution}\PY{o}{.}\PY{n}{real}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Check sum: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{stacionary\PYZus{}distribution}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{real}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+        \PY{n}{stacionary\PYZus{}distribution\PYZus{}round} \PY{o}{=} \PY{p}{(}\PY{n}{v} \PY{o}{/} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{v}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{o}{.}\PY{n}{real}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{stacionary\PYZus{}distribution\PYZus{}round}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Check sum after round: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{stacionary\PYZus{}distribution\PYZus{}round}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Stacionary distribution
+[1.39846205e-02 4.59924066e-02 1.01994761e-01 5.44738342e-02
+ 6.18536309e-02 6.73979107e-02 3.07747283e-04 1.85601668e-01
+ 4.69262579e-02 2.20088141e-02 2.12347538e-02 1.50814659e-02
+ 3.85932560e-02 2.46153263e-02 1.69257852e-02 1.30767711e-02
+ 1.81592446e-02 6.77060272e-02 1.53877335e-04 5.18785635e-02
+ 1.56952306e-02 5.46203074e-02 4.47920949e-02 4.61583354e-03
+ 8.00092027e-03 9.23461875e-04 2.30847846e-03 1.53838252e-04
+ 9.23112969e-04]
+
+Check sum:  0.9999999999999999
+
+[0.014  0.046  0.102  0.0545 0.0619 0.0674 0.0003 0.1856 0.0469 0.022
+ 0.0212 0.0151 0.0386 0.0246 0.0169 0.0131 0.0182 0.0677 0.0002 0.0519
+ 0.0157 0.0546 0.0448 0.0046 0.008  0.0009 0.0023 0.0002 0.0009]
+
+
+Check sum after round:  1.0001
+
+    \end{Verbatim}
+
+\pagebreak
+
+    \subsection{Příklad 4}\label{pux159uxedklad-4}
+
+    \begin{itemize}
+\tightlist
+\item
+  Na následujícím grafu je znázorněno srovnání empirických četností
+  výskytu znaků s teoretickými četnostmi, které vycházejí ze
+  stacionárního rozdělení.
+\item
+  Je dobře vidět, že jsou obě sady četností téměř identické, tudíž
+  předpokládáme, že ani nebude možné zamítnout jejich shodu ve prospěch
+  alternativy, tedy že jsou nezávislé. K tomuto využijeme testu dobré
+  shody.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{y\PYZus{}values} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{k}{for} \PY{n}{l} \PY{o+ow}{in} \PY{n}{xletters}\PY{p}{:}
+            \PY{n}{y\PYZus{}values}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{stacionary\PYZus{}distribution}\PY{o}{.}\PY{n}{real}\PY{p}{[}\PY{n}{letter\PYZus{}to\PYZus{}key}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{xletters}\PY{p}{,} \PY{n}{xletter\PYZus{}cnt}\PY{p}{,} \PY{n}{fc}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{0.48}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{xletters}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{y\PYZus{}values}\PY{p}{)}\PY{o}{*}\PY{n+nb}{len}\PY{p}{(}\PY{n}{xfile}\PY{p}{)}\PY{p}{,} \PY{n}{fc}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mf}{0.52}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mf}{0.249}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{znak}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{počet}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Empirické a stacionární četnosti}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{22}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Výběrové četnosti}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Stacionární četnosti}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Průnik}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+        \PY{k}{for} \PY{n}{tick} \PY{o+ow}{in} \PY{n}{ax}\PY{o}{.}\PY{n}{xaxis}\PY{o}{.}\PY{n}{get\PYZus{}major\PYZus{}ticks}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{n}{tick}\PY{o}{.}\PY{n}{label}\PY{o}{.}\PY{n}{set\PYZus{}fontsize}\PY{p}{(}\PY{l+m+mi}{14}\PY{p}{)}
+        \PY{k}{for} \PY{n}{tick} \PY{o+ow}{in} \PY{n}{ax}\PY{o}{.}\PY{n}{yaxis}\PY{o}{.}\PY{n}{get\PYZus{}major\PYZus{}ticks}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{n}{tick}\PY{o}{.}\PY{n}{label}\PY{o}{.}\PY{n}{set\PYZus{}fontsize}\PY{p}{(}\PY{l+m+mi}{14}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    \pagebreak
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{stationary\PYZus{}counts} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{y\PYZus{}values}\PY{p}{)}\PY{o}{*}\PY{n+nb}{len}\PY{p}{(}\PY{n}{xfile}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k}{def} \PY{n+nf}{merge\PYZus{}bins}\PY{p}{(}\PY{n}{counts}\PY{p}{)}\PY{p}{:}
+             \PY{n}{flag} \PY{o}{=} \PY{k+kc}{True}
+             \PY{k}{while}\PY{p}{(}\PY{n}{flag}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{flag} \PY{o}{=} \PY{k+kc}{False}
+                 \PY{n}{merged\PYZus{}arr} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{n}{waiting} \PY{o}{=} \PY{l+m+mi}{0}
+                 \PY{k}{for} \PY{n}{val} \PY{o+ow}{in} \PY{n}{counts}\PY{p}{:}
+                     \PY{k}{if} \PY{n}{val}\PY{o}{+}\PY{n}{waiting} \PY{o}{\PYZgt{}} \PY{l+m+mi}{4}\PY{p}{:}
+                         \PY{n}{merged\PYZus{}arr}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{val}\PY{o}{+}\PY{n}{waiting}\PY{p}{)}
+                         \PY{n}{waiting} \PY{o}{=} \PY{l+m+mi}{0}
+                     \PY{k}{else}\PY{p}{:}
+                         \PY{n}{flag} \PY{o}{=} \PY{k+kc}{True}
+                         \PY{n}{waiting} \PY{o}{+}\PY{o}{=} \PY{n}{val}\PY{p}{;}
+                 \PY{k}{if} \PY{n}{waiting} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n}{merged\PYZus{}arr}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{n}{waiting}
+                 \PY{n}{counts} \PY{o}{=} \PY{n}{merged\PYZus{}arr}
+             \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{counts}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{merged\PYZus{}stationary\PYZus{}counts} \PY{o}{=} \PY{n}{merge\PYZus{}bins}\PY{p}{(}\PY{n}{stationary\PYZus{}counts}\PY{p}{)}
+         \PY{n}{merged\PYZus{}xletter\PYZus{}cnt} \PY{o}{=} \PY{n}{merge\PYZus{}bins}\PY{p}{(}\PY{n}{xletter\PYZus{}cnt}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Četnosti mají shodnou délku po spojení binů?}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+         \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ano}\PY{l+s+s2}{\PYZdq{}} \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{merged\PYZus{}stationary\PYZus{}counts}\PY{p}{)} \PY{o}{==} \PY{n+nb}{len}\PY{p}{(}\PY{n}{merged\PYZus{}xletter\PYZus{}cnt}\PY{p}{)} \PY{k}{else} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ne}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Četnosti mají shodnou délku po spojení binů? Ano
+
+    \end{Verbatim}
+
+    \subsubsection{Test dobré shody}\label{test-dobruxe9-shody}
+
+\begin{itemize}
+\tightlist
+\item
+  \(H_0\) pro nás představuje dobrou shodu empirických a stacionárního
+  rozdělení,
+\item
+  \(H_A\) představuje jejich nezávislost.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{chi}\PY{p}{,} \PY{n}{p} \PY{o}{=} \PY{n}{stats}\PY{o}{.}\PY{n}{chisquare}\PY{p}{(}\PY{n}{merged\PYZus{}xletter\PYZus{}cnt}\PY{p}{,} \PY{n}{merged\PYZus{}stationary\PYZus{}counts}\PY{p}{)}
+         \PY{n}{crit} \PY{o}{=} \PY{n}{stats}\PY{o}{.}\PY{n}{chi2}\PY{o}{.}\PY{n}{isf}\PY{p}{(}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{merged\PYZus{}stationary\PYZus{}counts}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Hodnota testové statistiky: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{chi}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Kritická hodnota: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{crit}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p\PYZhy{}hodnota:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{p}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{*}\PY{l+m+mi}{20} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Zamítáme: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ano}\PY{l+s+s2}{\PYZdq{}} \PY{k}{if} \PY{n}{chi} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{crit} \PY{k}{else} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ne}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Hodnota testové statistiky:  0.014022647231326082
+Kritická hodnota:  37.65248413348277
+p-hodnota: 1.0
+--------------------
+Zamítáme:  Ne
+
+    \end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  Na hladině 5\% nezámítáme hypotézu \(H_0\), tedy \(H_A\) je
+  statisticky nevýznamné a může nastat chyba 2. druhu o které nic
+  nevíme. Ale z vysoké p-hodnoty můžeme s téměř sto procentní jistotou
+  říct, že chyba 2. druhu nenastane a platí hypotéza \(H_0\), jak jsme
+  předpokládali. Tedy empirické četnosti a vektor stacionárního
+  rozdělení mají shodné rozdělení.
+\end{itemize}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
